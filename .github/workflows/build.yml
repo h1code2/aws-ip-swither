@@ -1,11 +1,14 @@
-name: Build and Release
+name: Build Only
 
 on:
   push:
+    branches: [ main ]
     tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,16 +35,11 @@ jobs:
         run: |
           ls -la ip-switcher-*
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
-          files: |
+          name: ip-switcher-binaries
+          path: |
             ip-switcher-windows-amd64.exe
             ip-switcher-linux-amd64
             ip-switcher-darwin-arm64
-          draft: false
-          generate_release_notes: true
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
