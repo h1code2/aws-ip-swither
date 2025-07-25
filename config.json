@@ -1,0 +1,9 @@
+{
+  "instances": [
+    {
+      "name": "usa-f-ubuntu",
+      "instance_name": "USA-F-Ubuntu-1-1",
+      "static_ip_name": "USA-F-StaticIp-1"
+    }
+  ]
+}
